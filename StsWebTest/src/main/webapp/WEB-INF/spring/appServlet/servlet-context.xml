@@ -21,8 +21,24 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!--
+	<beans:bean id="sampleInterceptor" 
+	            class="net.hibiznet.app.interceptor.LoginInterceptor"/>
+	
+	<interceptors>
+	  <interceptor>
+	    <mapping path="/doA"/>
+	    <mapping path="/doB"/>
+	    <beans:ref bean="LoginInterceptor"/>
+	  </interceptor>
+	</interceptors>	
+	  -->
+	  
+	<interceptors>
+	 <beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	  <beans:property name="paramName" value="lang" /></beans:bean>
+	</interceptors>
+	
 	<context:component-scan base-package="net.hibiznet.app" />
-	
-	
 	
 </beans:beans>
