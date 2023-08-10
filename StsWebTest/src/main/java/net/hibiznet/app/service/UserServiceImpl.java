@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.hibiznet.app.dao.UserDAO;
 
@@ -25,17 +26,20 @@ public class UserServiceImpl implements UserService {
 		
 		return (Map<String, Object>)userDAO.selectUser(params);
 	}
-	
+	@Transactional(rollbackFor=Exception.class)
 	public void insertUser(Map<String, Object> params) {
-		
-		userDAO.insertUser(params);
+		try {
+			userDAO.insertUser(params);
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
 	}
-	
+	@Transactional(rollbackFor=Exception.class)
 	public void updateUser(Map<String, Object> params) {
 		
 		userDAO.insertUser(params);
 	}
-	
+	@Transactional(rollbackFor=Exception.class)
 	public void deleteUser(Map<String, Object> params) {
 		
 		userDAO.deleteUser(params);
